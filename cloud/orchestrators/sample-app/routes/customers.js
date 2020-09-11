@@ -4,6 +4,7 @@
  */
 
 let ip = require("ip");
+let external_ip = process.env.HOST_IP
 
 exports.list = function(req, res){
 
@@ -15,7 +16,7 @@ exports.list = function(req, res){
             if(err)
                 console.log("Error Selecting : %s ",err );
      
-            res.render('customers',{page_title:"Customers - Node.js on "+ip.address(),data:rows});
+            res.render('customers',{page_title:`Customers - Node.js on ${ip.address()}/${external_ip}`,data:rows});
                 
            
          });

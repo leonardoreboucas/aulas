@@ -21,15 +21,10 @@ git clone https://github.com/leonardoreboucas/lessons.git
 cd lessons/cloud/orchestrators/sample-app/
 sleep 15
 docker exec -i mysql57 sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" example' < customer.sql
-#pwd
-#ls -la
-#while [ $(netstat -nlp | grep :3306 | grep docker-proxy | wc -l) -eq 0 ]; do
-#  sleep 1;
-#done
-#mysql -h 127.0.0.1 -pmysql example < customer.sql
 
 #####################################
 #  CONFIGURE APPLICATION
 #####################################
+EXTERNAL_IP=$(host myip.opendns.com resolver1.opendns.com | grep Address: | awk -F' ' '{print $2}'| awk -F'#' '{print $1}')
 docker build -t app-sample .
-docker run -p 80:80 -e DB_PASSWORD=mysql -e DB_HOST=172.17.0.2 -e DB_PORT=3306 app-sample
+docker run -p 80:80 -e DB_PASSWORD=mysql -e DB_HOST=172.17.0.2 -e DB_PORT=3306 -e HOST_IP=${EXTERNAL_IP} app-sample
