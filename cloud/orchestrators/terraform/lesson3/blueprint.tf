@@ -1,12 +1,12 @@
 # Install Apache on VM
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "aulas-288410"
+  project     = "reboucas-lessonss"
   region      = "us-central1"
 }
 
-resource "google_compute_instance" "give-a-name-to-you-instance" {
-  name         = "give-a-name-to-you-instance"
+resource "google_compute_instance" "give-a-name-to-your-instance" {
+  name         = "give-a-name-to-your-instance"
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
