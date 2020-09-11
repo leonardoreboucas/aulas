@@ -3,7 +3,7 @@
 #  INSTALL DOCKER ENGINE
 #####################################
 apt-get update
-apt-get install -y git apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+apt-get install -y git apt-transport-https ca-certificates curl gnupg-agent software-properties-common mysql-client
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 add-apt-repository \
@@ -16,7 +16,7 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 #####################################
 #  CONFIGURE DATABASE
 #####################################
-docker run --name mysql57 -e MYSQL_ROOT_PASSWORD=mysql -d mysql:5.7
+docker run --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql -d mysql:5.7
 git clone https://github.com/leonardoreboucas/lessons.git
 cd lessons/cloud/orchestrators/sample-app/
 mysql -pmysql << customer.sql
