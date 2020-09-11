@@ -20,7 +20,7 @@ docker run --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_DAT
 git clone https://github.com/leonardoreboucas/lessons.git
 cd lessons/cloud/orchestrators/sample-app/
 while [ $(netstat -nlp | grep :3306 | grep docker-proxy | wc -l) -eq 0 ]; do
-  sleep 1
+  sleep 1;
 done
 mysql -h 127.0.0.1 -pmysql example < customer.sql
 
