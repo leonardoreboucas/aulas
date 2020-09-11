@@ -30,7 +30,7 @@ resource "google_compute_instance" "give-a-name-to-you-instance" {
     }
   }
 
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -y apache2"
+  metadata_startup_script = "curl https://raw.githubusercontent.com/leonardoreboucas/lessons/master/cloud/orchestrators/terraform/lesson5/initial_script.sh ; sh initial_script.sh "
 
   service_account {
     scopes = ["userinfo-email", "compute-ro", "storage-ro"]
