@@ -19,7 +19,7 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 docker run --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_DATABASE=example -d mysql:5.7
 git clone https://github.com/leonardoreboucas/lessons.git
 cd lessons/cloud/orchestrators/sample-app/
-mysql -h 127.0.0.1 -pmysql -d example << customer.sql
+mysql -h 127.0.0.1 -pmysql example < customer.sql
 
 #####################################
 #  CONFIGURE APPLICATION
