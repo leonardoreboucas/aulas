@@ -19,7 +19,7 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 docker run -t --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_DATABASE=example -d mysql:5.7
 git clone https://github.com/leonardoreboucas/lessons.git
 cd lessons/cloud/orchestrators/sample-app/
-docker exec -i mysql57 sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < customer.sql
+cat customer | docker exec -i mysql57 sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" example'
 #pwd
 #ls -la
 #while [ $(netstat -nlp | grep :3306 | grep docker-proxy | wc -l) -eq 0 ]; do
