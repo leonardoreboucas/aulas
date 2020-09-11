@@ -24,11 +24,5 @@ mysql -h 127.0.0.1 -pmysql example < customer.sql
 #####################################
 #  CONFIGURE APPLICATION
 #####################################
-#docker run --name app -p 80:80 -e DB_HOST=mysql57 -e DB_USERNAME=root -e DB_PASSWORD=mysql -e DB_PORT=3306 -d node:12.18
-
-
-#apt-get install -y git nodejs mysql-server
-#git clone https://github.com/leonardoreboucas/lessons.git
-#cd lessons/cloud/orchestrators/sample-app/
-#npm install --no-optional
-#npm start
+docker build -t app-sample .
+docker run -it -p 80:80 -e DB_PASSWORD=mysql -e DB_HOST=172.17.0.2 -e DB_PORT=3306 app-sample
