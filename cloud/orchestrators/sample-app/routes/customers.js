@@ -4,7 +4,7 @@
  */
 
 let ip = require("ip");
-let external_ip = process.env.HOST_IP
+let external_ip = process.env.HOST_IP || ''
 
 exports.list = function(req, res){
 
