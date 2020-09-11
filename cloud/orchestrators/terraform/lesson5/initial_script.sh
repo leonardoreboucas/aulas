@@ -3,7 +3,7 @@
 #  INSTALL DOCKER ENGINE
 #####################################
 apt-get update
-apt-get install -y git apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+apt-get install -y host git apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 add-apt-repository \
@@ -25,6 +25,6 @@ docker exec -i mysql57 sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" example
 #####################################
 #  CONFIGURE APPLICATION
 #####################################
-EXTERNAL_IP=host myip.opendns.com resolver1.opendns.com | grep Address: | awk -F' ' '{print $2}'| awk -F'#' '{print $1}'
+EXTERNAL_IP=host myip.opendns.com resolver1.opendns.com | grep "has address" | awk -F'address ' '{print $2}'
 docker build -t app-sample .
 docker run -p 80:80 -e DB_PASSWORD=mysql -e DB_HOST=172.17.0.2 -e DB_PORT=3306 -e HOST_IP=${EXTERNAL_IP} -d app-sample
