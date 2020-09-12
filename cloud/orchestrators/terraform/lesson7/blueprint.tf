@@ -1,4 +1,4 @@
-# Scalling up to 3 instances
+# Scales up to 3 instances
 provider "google" {
   credentials = file("../credentials.json")
   project     = "reboucas-lessons"
