@@ -1,4 +1,4 @@
-# Scales up to 3 instances
+# Configuring load balancer
 provider "google" {
   credentials = file("../credentials.json")
   project     = "reboucas-lessons"
