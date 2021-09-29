@@ -30,7 +30,7 @@ resource "google_compute_instance" "give-a-name-to-your-instance" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["http-server", "https-server"]
+  tags = ["web"]
 
   boot_disk {
     initialize_params {
@@ -62,7 +62,7 @@ resource "google_compute_instance" "give-a-name-to-your-instance-2" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["http-server", "https-server"]
+  tags = ["web"]
 
   boot_disk {
     initialize_params {
@@ -93,7 +93,7 @@ resource "google_compute_instance" "give-a-name-to-your-instance-3" {
   name         = "give-a-name-to-your-instance-${random_string.random3.result}"
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
-  tags = ["http-server", "https-server"]
+  tags = ["web"]
 
   boot_disk {
     initialize_params {
@@ -151,7 +151,7 @@ resource "google_compute_global_forwarding_rule" "http" {
 
 resource "google_compute_target_http_proxy" "default" {
   name    = "http-proxy-${random_string.random.result}${random_string.random2.result}${random_string.random3.result}"
-  url_map = element(compact(concat(list(""), google_compute_url_map.default.*.self_link)), 0)
+  url_map = element(compact(concat(google_compute_url_map.default.*.self_link)), 0)
 }
 
 resource "google_compute_url_map" "default" {
@@ -174,7 +174,7 @@ resource "google_compute_backend_service" "default" {
 
 resource "google_compute_http_health_check" "default" {
   name         = "backend-hc-${random_string.random.result}${random_string.random2.result}${random_string.random3.result}"
-  request_path = "/"
+  request_path = "/customers"
   port         = "80"
 }
 
@@ -189,6 +189,20 @@ resource "google_compute_firewall" "default-hc" {
   }
 }
 
+resource "google_compute_firewall" "rules" {
+  name        = "my-firewall-rule"
+  network     = "default"
+  description = "Creates firewall rule targeting tagged instances"
+
+  allow {
+    protocol  = "tcp"
+    ports     = ["80", "8080", "1000-2000"]
+  }
+  target_tags = ["web"]
+}
+
 output "loadbalancer_ip_addr" {
   value = google_compute_global_forwarding_rule.http.ip_address
 }
+
+

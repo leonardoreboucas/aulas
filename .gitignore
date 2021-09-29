@@ -37,4 +37,5 @@ credentials.json
 *.terraform
 *.tfstate
 *.tfstate.*
+*.hcl
 
