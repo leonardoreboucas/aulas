@@ -51,16 +51,16 @@ app.use(
 
 );
 
+app.get('/', function(req, res) {
+  res.redirect('/customers');
+});
 
-
-app.get('/', routes.index);
 app.get('/customers', customers.list);
 app.get('/customers/add', customers.add);
 app.post('/customers/add', customers.save);
 app.get('/customers/delete/:id', customers.delete_customer);
 app.get('/customers/edit/:id', customers.edit);
 app.post('/customers/edit/:id',customers.save_edit);
-
 
 app.use(app.router);
 

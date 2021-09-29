@@ -1,7 +1,7 @@
 # Configuring load balancer
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "reboucas-lessons"
+  project     = "aula-unb-2909"
   region      = "us-central1"
 }
 

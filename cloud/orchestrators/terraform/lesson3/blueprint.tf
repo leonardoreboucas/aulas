@@ -1,7 +1,7 @@
 # Install Apache on VM
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "reboucas-lessonss"
+  project     = "aula-unb-2909"
   region      = "us-central1"
 }
 
