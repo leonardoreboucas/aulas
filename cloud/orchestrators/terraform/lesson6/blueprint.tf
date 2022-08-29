@@ -1,7 +1,7 @@
 # Scalling up to 3 instances
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "aula-unb-2909"
+  project     = "leonardo-340217"
   region      = "us-central1"
 }
 
@@ -30,11 +30,11 @@ resource "google_compute_instance" "give-a-name-to-your-instance" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["web"]
+  tags = ["web", "http-server"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -62,11 +62,11 @@ resource "google_compute_instance" "give-a-name-to-your-instance-2" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["web"]
+  tags = ["web", "http-server"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -94,11 +94,11 @@ resource "google_compute_instance" "give-a-name-to-your-instance-3" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["web"]
+  tags = ["web", "http-server"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -131,4 +131,5 @@ resource "google_compute_firewall" "rules" {
     ports     = ["80", "8080", "1000-2000"]
   }
   target_tags = ["web"]
+  source_tags = ["web"]
 }

@@ -1,6 +1,6 @@
 # Simple Plugin Initialization
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "aula-unb-2909"
+  project     = "leonardo-340217"
   region      = "us-central1"
 }

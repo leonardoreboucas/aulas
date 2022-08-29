@@ -1,7 +1,7 @@
 # Configuring load balancer
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "aula-unb-2909"
+  project     = "leonardo-340217"
   region      = "us-central1"
 }
 
@@ -30,11 +30,11 @@ resource "google_compute_instance" "give-a-name-to-your-instance" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["web"]
+  tags = ["web", "http-server"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -62,11 +62,11 @@ resource "google_compute_instance" "give-a-name-to-your-instance-2" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 
-  tags = ["web"]
+  tags = ["web", "http-server"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -93,11 +93,11 @@ resource "google_compute_instance" "give-a-name-to-your-instance-3" {
   name         = "give-a-name-to-your-instance-${random_string.random3.result}"
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
-  tags = ["web"]
+  tags = ["web", "http-server"]
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -170,7 +170,7 @@ resource "google_compute_backend_service" "default" {
   health_checks   = [element(google_compute_http_health_check.default.*.self_link, 0)]
   security_policy = ""
   enable_cdn      = "false"
-}
+  }
 
 resource "google_compute_http_health_check" "default" {
   name         = "backend-hc-${random_string.random.result}${random_string.random2.result}${random_string.random3.result}"
@@ -199,6 +199,7 @@ resource "google_compute_firewall" "rules" {
     ports     = ["80", "8080", "1000-2000"]
   }
   target_tags = ["web"]
+  source_tags = ["web"]
 }
 
 output "loadbalancer_ip_addr" {

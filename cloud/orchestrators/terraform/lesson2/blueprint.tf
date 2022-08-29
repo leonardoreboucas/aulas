@@ -1,7 +1,7 @@
 # Create a VM instance
 provider "google" {
   credentials = file("../credentials.json")
-  project     = "aula-unb-2909"
+  project     = "leonardo-340217"
   region      = "us-central1"
 }
 
@@ -13,7 +13,7 @@ resource "google_compute_instance" "give-a-name-to-your-instance" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10"
     }
   }
 
